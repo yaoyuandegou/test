@@ -6,7 +6,7 @@
     <home-swiper :banners="banners"/>
     <home-recommend-view :recommends="recommends"/>
     <home-feature-view/>
-    <tab-control :titles="['流行','新款','精选']"></tab-control>
+    <tab-control :titles="['流行','新款','精选']" class="sticky"></tab-control>
 
     <ul>
       <li>列表1</li>
@@ -113,5 +113,9 @@ export default {
     position: fixed;
     left:0;top:0;right:0;
     z-index: 100;
+  }
+  .sticky{
+    position: sticky;
+    top:40px;
   }
 </style>
