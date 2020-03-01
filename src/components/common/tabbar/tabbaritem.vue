@@ -46,15 +46,17 @@ export default {
 <style lang="less" scoped>
 .tab-bar-item{
     text-align: center;
-    padding:6px 0 10px 0;
+    padding:16px 0;
     flex:1;
     img{
         vertical-align: middle;
-        width:60px;
+        width:20px;
+        padding-bottom:6px;
     }
     .title{
         line-height: 1;
         color:#999;
+        font-size: 12px;
     }
 
 }

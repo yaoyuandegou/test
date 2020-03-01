@@ -1,23 +1,23 @@
 <template>
     <tab-bar>
-        <tab-bar-item path="/home" activeColor="#5d63ce">
-            <img slot="item-icon" src="./img/home.png">
-            <img slot="item-icon-active" src="./img/home-a.png">
+        <tab-bar-item path="/home" activeColor="#ff5777">
+            <img slot="item-icon" src="./img/home.svg">
+            <img slot="item-icon-active" src="./img/home_active.svg">
             <span slot="item-text">首页</span>
         </tab-bar-item>
-        <tab-bar-item path="/category" activeColor="#5d63ce">
-            <img slot="item-icon" src="./img/category.png">
-            <img slot="item-icon-active" src="./img/category-a.png">
+        <tab-bar-item path="/category" activeColor="#ff5777">
+            <img slot="item-icon" src="./img/category.svg">
+            <img slot="item-icon-active" src="./img/category_active.svg">
             <span slot="item-text">分类</span>
         </tab-bar-item>
-        <tab-bar-item  path="/cart" activeColor="#5d63ce">
-            <img slot="item-icon" src="./img/cart.png">
-            <img slot="item-icon-active" src="./img/cart-a.png">
+        <tab-bar-item  path="/cart" activeColor="#ff5777">
+            <img slot="item-icon" src="./img/shopcart.svg">
+            <img slot="item-icon-active" src="./img/shopcart_active.svg">
             <span slot="item-text">购物车</span>
         </tab-bar-item>
-        <tab-bar-item path="/profile" activeColor="#5d63ce">
-            <img slot="item-icon" src="./img/profile.png">
-            <img slot="item-icon-active" src="./img/profile-a.png">
+        <tab-bar-item path="/profile" activeColor="#ff5777">
+            <img slot="item-icon" src="./img/profile.svg">
+            <img slot="item-icon-active" src="./img/profile_active.svg">
             <span slot="item-text">个人</span>
         </tab-bar-item>
     </tab-bar>

@@ -41,16 +41,28 @@
         swiperStyle: {}, // swiper样式
         currentIndex: 1, // 当前的index
         scrolling: false, // 是否正在滚动
+        temptimer:'', // 临时的interval，为了删除用
       }
     },
     mounted: function () {
       // 1.操作DOM, 在前后添加Slide
-      setTimeout(() => {
-        this.handleDom();
+      // 这里要引入interval，来检测子路由什么时候mounted
+      // 正常情况是子mount后父才mount：这里加载轮播代码正确；
+      // 但现在情况特殊：
+      // 先父了，后才子
+      // 原因：在homeSwiper.vue里，swiper套swiperitem，用banners循环出swiperitem下slot里的东西，这样的话，因为banners是异步，所以swiperitem要等到数据到了以后才能mount，所以落后了
+      this.temptimer=setInterval(()=>{
+        let swiperEl = document.querySelector('.swiper');
+        let slidesEls = swiperEl.getElementsByClassName('slide');
+        if(slidesEls.length>0){
 
-        // 2.开启定时器
-        this.startTimer();
-      }, 100)
+           this.handleDom();
+          // 2.开启定时器
+          this.startTimer(); 
+          clearInterval(this.temptimer);
+        };
+      },500);
+
     },
     methods: {
 		  /**

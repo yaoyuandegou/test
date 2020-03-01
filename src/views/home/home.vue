@@ -5,8 +5,8 @@
     </nav-bar>
     <home-swiper :banners="banners"/>
     <home-recommend-view :recommends="recommends"/>
-    <home-feature-view></home-feature-view>
-    <h1>首页</h1>
+    <home-feature-view/>
+    <tab-control :titles="['流行','新款','精选']"></tab-control>
 
     <ul>
       <li>列表1</li>
@@ -39,24 +39,51 @@
       <li>列表28</li>
       <li>列表29</li>
       <li>列表30</li>
+      <li>列表9</li>
+      <li>列表10</li>
+      <li>列表11</li>
+      <li>列表12</li>
+      <li>列表13</li>
+      <li>列表14</li>
+      <li>列表15</li>
+      <li>列表16</li>
+      <li>列表17</li>
+      <li>列表18</li>
+      <li>列表19</li>
+      <li>列表20</li>
+      <li>列表21</li>
+      <li>列表22</li>
+      <li>列表23</li>
+      <li>列表24</li>
+      <li>列表25</li>
+      <li>列表26</li>
+      <li>列表27</li>
+      <li>列表28</li>
+      <li>列表29</li>
+      <li>列表30</li>
     </ul>
     
   </div>
 </template>
 
 <script>
-import navBar from 'components/common/navbar/NavBar.vue';
+//导入本页面文件夹里的页面的子组件
 import homeSwiper from './childcomps/homeSwiper';
 import homeRecommendView from './childcomps/homeRecommendView';
 import homeFeatureView from './childcomps/homeFeatureView';
 
+//导入公共组件
+import navBar from 'components/common/navbar/NavBar.vue';
+import tabControl from 'components/content/tabcontrol/tabControl';
+//导入其他功能性组件
 import {getHomeMultidata} from "network/home";
 //插件引入swiper
 //import swiper from 'components/common/swiper/swiper.vue';
 export default {
   name:"home",
   components:{
-    navBar,homeSwiper,homeRecommendView,homeFeatureView
+    homeSwiper,homeRecommendView,homeFeatureView,
+    tabControl,navBar,
     /* swiper */
   },
   props:{},
@@ -65,7 +92,6 @@ export default {
       banners:[],
       recommends:[],
       banners:[],
-
       result:null,
     }
   },
