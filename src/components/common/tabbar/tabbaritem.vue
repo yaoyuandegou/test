@@ -52,6 +52,7 @@ export default {
         vertical-align: middle;
         width:20px;
         padding-bottom:6px;
+        opacity: 0.3;
     }
     .title{
         line-height: 1;

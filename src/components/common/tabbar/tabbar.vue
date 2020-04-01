@@ -20,7 +20,7 @@ export default {
     position: fixed;
     left:0;right:0;bottom:0;
     display:flex;
-    background-color: #f0f0f0;
+    background-color: white;
     //padding:0 20px;
     box-shadow: 0px -4px 50px rgb(233, 233, 233);
     border-top: 1px solid #ddd;
