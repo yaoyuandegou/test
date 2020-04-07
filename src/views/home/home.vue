@@ -7,61 +7,8 @@
     <home-recommend-view :recommends="recommends"/>
     <home-feature-view/>
     <tab-control :titles="['流行','新款','精选']" class="sticky"></tab-control>
-
-    <ul>
-      <li>列表1</li>
-      <li>列表2</li>
-      <li>列表3</li>
-      <li>列表4</li>
-      <li>列表5</li>
-      <li>列表6</li>
-      <li>列表7</li>
-      <li>列表8</li>
-      <li>列表9</li>
-      <li>列表10</li>
-      <li>列表11</li>
-      <li>列表12</li>
-      <li>列表13</li>
-      <li>列表14</li>
-      <li>列表15</li>
-      <li>列表16</li>
-      <li>列表17</li>
-      <li>列表18</li>
-      <li>列表19</li>
-      <li>列表20</li>
-      <li>列表21</li>
-      <li>列表22</li>
-      <li>列表23</li>
-      <li>列表24</li>
-      <li>列表25</li>
-      <li>列表26</li>
-      <li>列表27</li>
-      <li>列表28</li>
-      <li>列表29</li>
-      <li>列表30</li>
-      <li>列表9</li>
-      <li>列表10</li>
-      <li>列表11</li>
-      <li>列表12</li>
-      <li>列表13</li>
-      <li>列表14</li>
-      <li>列表15</li>
-      <li>列表16</li>
-      <li>列表17</li>
-      <li>列表18</li>
-      <li>列表19</li>
-      <li>列表20</li>
-      <li>列表21</li>
-      <li>列表22</li>
-      <li>列表23</li>
-      <li>列表24</li>
-      <li>列表25</li>
-      <li>列表26</li>
-      <li>列表27</li>
-      <li>列表28</li>
-      <li>列表29</li>
-      <li>列表30</li>
-    </ul>
+    <!-- <button type="priamry" @click="getHomeGoods('pop')">获取数据</button> -->
+    <good-list :goods="goods['pop'].list"></good-list>
     
   </div>
 </template>
@@ -75,8 +22,11 @@ import homeFeatureView from './childcomps/homeFeatureView';
 //导入公共组件
 import navBar from 'components/common/navbar/NavBar.vue';
 import tabControl from 'components/content/tabcontrol/tabControl';
+import goodList from 'components/content/goods/goodsList';
+
+
 //导入其他功能性组件
-import {getHomeMultidata} from "network/home";
+import {getHomeMultidata,getHomeGoods} from "network/home";
 //插件引入swiper
 //import swiper from 'components/common/swiper/swiper.vue';
 export default {
@@ -84,6 +34,7 @@ export default {
   components:{
     homeSwiper,homeRecommendView,homeFeatureView,
     tabControl,navBar,
+    goodList,
     /* swiper */
   },
   props:{},
@@ -91,15 +42,40 @@ export default {
     return {
       banners:[],
       recommends:[],
-      banners:[],
+      goods:{
+        'pop':{page:0,list:[]},
+        'new':{page:0,list:[]},
+        'sell':{page:0,list:[]},
+      },
       result:null,
     }
   },
   created(){
-    getHomeMultidata().then(res=>{
-      this.banners=res.data.banner.list;
-      this.recommends=res.data.recommend.list;
-    });
+    // 请求多个数据
+    this.getHomeMultidata();
+    // 请求商品数据
+    this.getHomeGoods('pop');
+    this.getHomeGoods('new');
+    this.getHomeGoods('sell');
+  },
+  methods:{
+    getHomeMultidata(){
+      getHomeMultidata().then(res=>{
+        this.banners=res.data.banner.list;
+        this.recommends=res.data.recommend.list;
+      });
+    },   
+    getHomeGoods(type){
+      const page=this.goods[type].page+1;
+      getHomeGoods(type,page).then(res=>{
+        this.goods[type].list.push(...res.data.list);
+        this.goods[type].page+=1;
+        console.log(res);
+      });
+    },
+    
+
+
   },
 }
 </script>
