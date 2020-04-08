@@ -93,5 +93,6 @@ export default {
   .sticky{
     position: sticky;
     top:40px;
+    z-index: 100;
   }
 </style>
