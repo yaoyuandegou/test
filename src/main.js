@@ -10,11 +10,17 @@ import store from './store'
 
 //Vue.use(vueSwiper);
 
+// 挂载事件总线
+const Bus=new Vue();
+
 
 
 Vue.config.productionTip = false
 
 new Vue({
+  data:{
+    Bus,
+  },
   router,
   store,
   render: h => h(App)

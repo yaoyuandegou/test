@@ -30,11 +30,10 @@ export default {
 </script>
 <style lang="less" scoped>
 .goods-list{
-    padding:20px;
+    padding:0px 8px 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    
+    justify-content: space-between;   
 }
 
 

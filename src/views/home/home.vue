@@ -8,7 +8,7 @@
     <home-feature-view/>
     <tab-control :titles="['流行','新款','精选']" class="sticky"></tab-control>
     <!-- <button type="priamry" @click="getHomeGoods('pop')">获取数据</button> -->
-    <good-list :goods="goods['pop'].list"></good-list>
+    <good-list :goods="showGoods"></good-list>
     
   </div>
 </template>
@@ -47,8 +47,14 @@ export default {
         'new':{page:0,list:[]},
         'sell':{page:0,list:[]},
       },
+      currentType:'pop',
       result:null,
     }
+  },
+  computed:{
+    showGoods(){
+      return this.goods[this.currentType].list;
+    },
   },
   created(){
     // 请求多个数据
@@ -58,7 +64,26 @@ export default {
     this.getHomeGoods('new');
     this.getHomeGoods('sell');
   },
+  mounted(){
+    // 这里写的是响应子组件的一些触发事件采取的措施
+    this.$root.Bus.$on('tabClick',index=>{
+      switch(index){
+        case 0:
+          this.currentType='pop'
+          break
+        case 1:
+          this.currentType='new'
+          break
+        case 2:
+          this.currentType='sell'
+          break
+      };
+    });
+  },
   methods:{
+    // 事件监听
+
+    // 网络请求
     getHomeMultidata(){
       getHomeMultidata().then(res=>{
         this.banners=res.data.banner.list;
@@ -70,12 +95,8 @@ export default {
       getHomeGoods(type,page).then(res=>{
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page+=1;
-        console.log(res);
       });
     },
-    
-
-
   },
 }
 </script>

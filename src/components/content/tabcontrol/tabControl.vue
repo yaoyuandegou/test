@@ -2,7 +2,7 @@
   <div class="tab-control" ref="tab-control">
       <div v-for="(item,index) in titles" 
         class="item" 
-        @click="currentHitItem=index" 
+        @click="itemClick(index)" 
         :class="{active:currentHitItem==index}">
           <p style="font-size:16px;transform:scale(0.4)">important</p>
           <span>{{item}}</span>
@@ -30,7 +30,10 @@ export default {
   watch:{},
   computed:{},
   methods:{
-
+      itemClick(index){
+          this.currentHitItem=index;
+          this.$root.Bus.$emit('tabClick',index);
+      },
   },
   created(){},
   mounted(){
@@ -41,10 +44,12 @@ export default {
 <style lang="less" scoped>
 .tab-control{
     display: flex;
-    background-color: rgba(255, 255, 255, 0.726);
-
+    background-color: rgba(255, 255, 255, 1);
     text-align: center;
-    padding: 20px 90px 10px;
+    @media screen and (max-width:374px){
+        padding:5px 20% 5px;
+    }
+    padding:5px 20% 5px;
     justify-content:space-between;
 
     .item{
