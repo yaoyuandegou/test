@@ -7,6 +7,7 @@
 
 <script>
 import goodsListItem from './goodsListItem';
+
 export default {
   components:{goodsListItem,},
   props:{
