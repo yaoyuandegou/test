@@ -3,12 +3,15 @@
     <nav-bar class="home-nav">
       <p slot="center">购物街</p>
     </nav-bar>
-    <home-swiper :banners="banners"/>
-    <home-recommend-view :recommends="recommends"/>
-    <home-feature-view/>
-    <tab-control :titles="['流行','新款','精选']" class="sticky"></tab-control>
-    <!-- <button type="priamry" @click="getHomeGoods('pop')">获取数据</button> -->
-    <good-list :goods="showGoods"></good-list>
+    <b-scroll class="scroll-wrapper">
+      <home-swiper :banners="banners"/>
+      <home-recommend-view :recommends="recommends"/>
+      <home-feature-view/>
+      <tab-control :titles="['流行','新款','精选']" class="sticky"></tab-control>
+      <!-- <button type="priamry" @click="getHomeGoods('pop')">获取数据</button> -->
+      <good-list :goods="showGoods"></good-list>
+    </b-scroll>
+    <back-top-icon></back-top-icon>
     
   </div>
 </template>
@@ -23,10 +26,13 @@ import homeFeatureView from './childcomps/homeFeatureView';
 import navBar from 'components/common/navbar/NavBar.vue';
 import tabControl from 'components/content/tabcontrol/tabControl';
 import goodList from 'components/content/goods/goodsList';
-
+import backTopIcon from 'components/content/backtop/backtop';
 
 //导入其他功能性组件
 import {getHomeMultidata,getHomeGoods} from "network/home";
+//导入页面滚动功能组件
+import bScroll from "components/common/bscroll/bscroll";
+
 //插件引入swiper
 //import swiper from 'components/common/swiper/swiper.vue';
 export default {
@@ -35,6 +41,8 @@ export default {
     homeSwiper,homeRecommendView,homeFeatureView,
     tabControl,navBar,
     goodList,
+    bScroll,
+    backTopIcon,
     /* swiper */
   },
   props:{},
@@ -102,7 +110,9 @@ export default {
 </script>
 <style lang="less" scoped>
   #home{
-    padding-top:44px;
+    //padding-top:44px;
+    height: 100vh;
+    position: relative;
   }
   .home-nav{
     background-color: var(--color-tint);
@@ -116,4 +126,15 @@ export default {
     top:40px;
     z-index: 100;
   }
+  .scroll-wrapper{
+    //height:100vh;
+    overflow: hidden;
+    //height: calc(100vh - 114px);
+    //除了用calc计算，还可以用绝对定位
+    position: absolute;
+    top:44px;left:0;right:0;bottom:70px;
+    background-color:#ffffff;
+  }
+
+
 </style>

@@ -120,6 +120,9 @@ export default {
     this.scroll=new BScroll(this.$refs.sectionScroll,{
       click:true,
     });
+      this.scroll.on('scroll',(position)=>{
+
+      });
   },
 }
 </script>
