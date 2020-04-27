@@ -17,7 +17,7 @@ export default {
   methods:{
       backtoTop(){
           
-      };
+      },
   },
   created(){},
   mounted(){}

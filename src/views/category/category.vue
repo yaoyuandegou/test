@@ -2,106 +2,7 @@
   <div class="category">
       <section class="wrapper" ref="sectionScroll">
         <ul class="content">
-          <li>this-is-1</li>
-          <li>this-is-2</li>
-          <li>this-is-3</li>
-          <li>this-is-4</li>
-          <li>this-is-5</li>
-          <li>this-is-6</li>
-          <li>this-is-7</li>
-          <li>this-is-8</li>
-          <li>this-is-9</li>
-          <li>this-is-10</li>
-          <li>this-is-11</li>
-          <li>this-is-12</li>
-          <li>this-is-13</li>
-          <li>this-is-14</li>
-          <li>this-is-15</li>
-          <li>this-is-16</li>
-          <li>this-is-17</li>
-          <li>this-is-18</li>
-          <li>this-is-19</li>
-          <li>this-is-20</li>
-          <li>this-is-21</li>
-          <li>this-is-22</li>
-          <li>this-is-23</li>
-          <li>this-is-24</li>
-          <li>this-is-25</li>
-          <li>this-is-26</li>
-          <li>this-is-27</li>
-          <li>this-is-28</li>
-          <li>this-is-29</li>
-          <li>this-is-30</li>
-          <li>this-is-31</li>
-          <li>this-is-32</li>
-          <li>this-is-33</li>
-          <li>this-is-34</li>
-          <li>this-is-35</li>
-          <li>this-is-36</li>
-          <li>this-is-37</li>
-          <li>this-is-38</li>
-          <li>this-is-39</li>
-          <li>this-is-40</li>
-          <li>this-is-41</li>
-          <li>this-is-42</li>
-          <li>this-is-43</li>
-          <li>this-is-44</li>
-          <li>this-is-45</li>
-          <li>this-is-46</li>
-          <li>this-is-47</li>
-          <li>this-is-48</li>
-          <li>this-is-49</li>
-          <li>this-is-50</li>
-          <li>this-is-51</li>
-          <li>this-is-52</li>
-          <li>this-is-53</li>
-          <li>this-is-54</li>
-          <li>this-is-55</li>
-          <li>this-is-56</li>
-          <li>this-is-57</li>
-          <li>this-is-58</li>
-          <li>this-is-59</li>
-          <li>this-is-60</li>
-          <li>this-is-61</li>
-          <li>this-is-62</li>
-          <li>this-is-63</li>
-          <li>this-is-64</li>
-          <li>this-is-65</li>
-          <li>this-is-66</li>
-          <li>this-is-67</li>
-          <li>this-is-68</li>
-          <li>this-is-69</li>
-          <li>this-is-70</li>
-          <li>this-is-71</li>
-          <li>this-is-72</li>
-          <li>this-is-73</li>
-          <li>this-is-74</li>
-          <li>this-is-75</li>
-          <li>this-is-76</li>
-          <li>this-is-77</li>
-          <li>this-is-78</li>
-          <li>this-is-79</li>
-          <li>this-is-80</li>
-          <li>this-is-81</li>
-          <li>this-is-82</li>
-          <li>this-is-83</li>
-          <li>this-is-84</li>
-          <li>this-is-85</li>
-          <li>this-is-86</li>
-          <li>this-is-87</li>
-          <li>this-is-88</li>
-          <li>this-is-89</li>
-          <li>this-is-90</li>
-          <li>this-is-91</li>
-          <li>this-is-92</li>
-          <li>this-is-93</li>
-          <li>this-is-94</li>
-          <li>this-is-95</li>
-          <li>this-is-96</li>
-          <li>this-is-97</li>
-          <li>this-is-98</li>
-          <li>this-is-99</li>
-          <li>this-is-100</li>
+          <li  v-for="item in 100">hello-{{item}}</li>
         </ul>
       </section>
   </div>
@@ -119,9 +20,10 @@ export default {
   mounted(){
     this.scroll=new BScroll(this.$refs.sectionScroll,{
       click:true,
+      probeType:0,
     });
       this.scroll.on('scroll',(position)=>{
-
+        console.log('ok');
       });
   },
 }
