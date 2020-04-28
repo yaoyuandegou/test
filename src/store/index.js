@@ -5,9 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    testVuexData:0,
+    imgLoadFinish:0,
   },
   mutations: {
+    addImgLoadNum(state){
+      state.imgLoadFinish++;
+    },
   },
   actions: {
   },

@@ -16,7 +16,7 @@
       <home-feature-view />
       <tab-control :titles="['流行','新款','精选']" class="sticky"></tab-control>
       <!-- <button type="priamry" @click="getHomeGoods('pop')">获取数据</button> -->
-      <good-list :goods="showGoods"></good-list>
+         <good-list :goods="showGoods"></good-list>
     </b-scroll>
     <transition name="fade">
       <back-top-icon @click.native="gotoTop" v-show="(-scrollPosition.y)>1000"></back-top-icon>
@@ -78,7 +78,12 @@ export default {
     showGoods() {
       return this.goods[this.currentType].list;
     },
-    ...mapState(["testVuexData"])
+   /*  ...mapState(["imgLoadFinish"]) */
+  },
+  watch:{
+/*     imgLoadFinish(){
+
+    }, */
   },
   created() {
     // 请求多个数据
@@ -87,10 +92,13 @@ export default {
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
+
+
+
   },
   mounted() {
     // 这里写的是响应子组件的一些触发事件采取的措施,用bus实现的好处是：不用再写响应函数在组件标签上了
-    this.$root.Bus.$on("tabClick", index => {
+    this.$bus.$on("tabClick", index => {
       switch (index) {
         case 0:
           this.currentType = "pop";
@@ -102,6 +110,10 @@ export default {
           this.currentType = "sell";
           break;
       }
+    });
+    //对bus总线的监听，一般放这里
+    this.$bus.$on('itemImgLoad',()=>{
+      this.$refs.bScroll && this.$refs.bScroll.refreshed();
     });
   },
   methods: {

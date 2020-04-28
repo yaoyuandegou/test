@@ -25,7 +25,12 @@ export default {
         scroll:null,
     }
   },
+  created(){
+
+
+  },
   mounted(){
+
       this.scroll=new BScroll(this.$refs.scrollPart,{
           click:true,
           pullUpLoad:this.pullUpLoad,
@@ -33,6 +38,7 @@ export default {
           pullDownRefresh:true, */
           probeType:this.probeType,
       });
+      //console.log(this.scroll);
       this.scroll.on('scroll',(position)=>{
           this.$emit('outputScrollPosition',position);
       });
@@ -50,10 +56,13 @@ export default {
     scrollTo(x,y,time=300){
       this.scroll.scrollTo(x,y,time);
     },
+    refreshed(){
+      this.scroll.refresh && this.scroll.refresh();
+    },
 
 /*   保留这种写法
      finishPullUp(){
-      this.scroll.finishPullUp();
+      this.scroll && this.scroll.finishPullUp();
     }, */
   },
 }

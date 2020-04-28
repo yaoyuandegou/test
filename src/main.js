@@ -11,15 +11,17 @@ import store from './store'
 //Vue.use(vueSwiper);
 
 // 挂载事件总线
-const Bus=new Vue();
+//const Bus=new Vue();
 
+//创建事件总线新方法
+Vue.prototype.$bus=new Vue();
 
 
 Vue.config.productionTip = false
 
 new Vue({
   data:{
-    Bus,
+    //Bus,这是 上边 const Bus=new Vue()写法，不用了麻烦
   },
   router,
   store,

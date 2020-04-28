@@ -16,7 +16,10 @@ const routes = [
   {
     path: '/home',
     //name: 'home',
-    component: Home
+    component: Home,
+    meta:{
+      keepAlive:false,
+    }
   },
   {
     path: '/category',

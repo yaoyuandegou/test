@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list-item">
-      <img :src="goodsItem.show.img" alt="">
+      <img :src="goodsItem.show.img" alt="" @load="imageLoad">
       <div class="goods-info">
           <p>{{goodsItem.title}}</p>
           <span class="price">{{goodsItem.price}}</span>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import {mapState,mapMutations} from "vuex";
 export default {
   components:{},
   props:{
@@ -25,8 +26,17 @@ export default {
     }
   },
   watch:{},
-  computed:{},
-  methods:{},
+  computed:{
+/*       ...mapState(["imgLoadFinish"]), */
+  },
+  methods:{
+      /* ...mapMutations(["addImgLoadNum"]), */
+      imageLoad(){
+          //this.addImgLoadNum();
+          this.$bus.$emit('itemImgLoad');
+      },
+
+  },
   created(){},
   mounted(){}
 }

@@ -32,7 +32,7 @@ export default {
   methods:{
       itemClick(index){
           this.currentHitItem=index;
-          this.$root.Bus.$emit('tabClick',index);
+          this.$bus.$emit('tabClick',index);
       },
   },
   created(){},
