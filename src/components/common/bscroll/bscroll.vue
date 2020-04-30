@@ -39,14 +39,18 @@ export default {
           probeType:this.probeType,
       });
       //console.log(this.scroll);
-      this.scroll.on('scroll',(position)=>{
-          this.$emit('outputScrollPosition',position);
-      });
-       this.scroll.on('pullingUp',()=>{
-         this.$emit('pullingUp');
-         //这里写finishPullUp()也没问题，但逻辑好像差了一点，好像应该是emit执行结束以后，再执行才爽，这样的话，就得也在这里创建一个方法，然后home.vue里调用了，我先保留这个处理
-          this.scroll.finishPullUp();
-      });
+      if(this.pullUpLoad){
+        this.scroll.on('scroll',(position)=>{
+            this.$emit('outputScrollPosition',position);
+        });
+      };
+      if(this.probeType==3 ||this.probeType==2 ){
+        this.scroll.on('pullingUp',()=>{
+          this.$emit('pullingUp');
+          //这里写finishPullUp()也没问题，但逻辑好像差了一点，好像应该是emit执行结束以后，再执行才爽，这样的话，就得也在这里创建一个方法，然后home.vue里调用了，我先保留这个处理
+           this.scroll.finishPullUp();
+       });
+      };
 /*      this.scroll.on('pullingDown',()=>{
           this.scroll.finishPullDown();
       }); */
@@ -57,10 +61,11 @@ export default {
       this.scroll.scrollTo(x,y,time);
     },
     refreshed(){
+      console.log('--------');
       this.scroll.refresh && this.scroll.refresh();
     },
 
-/*   保留这种写法
+/*   保留这种写法,这个函数是要准备在home里的getHomeGoods里调用的
      finishPullUp(){
       this.scroll && this.scroll.finishPullUp();
     }, */
