@@ -9,7 +9,7 @@ module.exports = {
     configureWebpack: {
         resolve: {
             alias: {
-                'common': '@/common',
+                'commonjs': '@/commonjs',
                 'assets': '@/assets',
                 'components': '@/components',
                 'network': '@/network',  

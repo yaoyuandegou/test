@@ -14,7 +14,11 @@
       <home-swiper :banners="banners" />
       <home-recommend-view :recommends="recommends" />
       <home-feature-view />
-      <tab-control :titles="['流行','新款','精选']" class="sticky"></tab-control>
+      <tab-control 
+      :titles="['流行','新款','精选']" 
+      class="sticky"
+      ref="tabControl"
+      ></tab-control>
       <!-- <button type="priamry" @click="getHomeGoods('pop')">获取数据</button> -->
          <good-list :goods="showGoods"></good-list>
     </b-scroll>
@@ -41,6 +45,9 @@ import backTopIcon from "components/content/backtop/backtop";
 import { getHomeMultidata, getHomeGoods } from "network/home";
 //导入页面滚动功能组件
 import bScroll from "components/common/bscroll/bscroll";
+//导入utils.js
+import {debounce} from "commonjs/utils.js";
+
 
 //插件引入swiper
 //import swiper from 'components/common/swiper/swiper.vue';
@@ -71,7 +78,8 @@ export default {
       },
       currentType: "pop",
       result: null,
-      scrollPosition: []
+      scrollPosition: [],
+      tabOffsetTop:0,
     };
   },
   computed: {
@@ -97,7 +105,7 @@ export default {
 
   },
   mounted() {
-    // 这里写的是响应子组件的一些触发事件采取的措施,用bus实现的好处是：不用再写响应函数在组件标签上了
+    //1: 这里写的是响应子组件的一些触发事件采取的措施,用bus实现的好处是：不用再写响应函数在组件标签上了
     this.$bus.$on("tabClick", index => {
       switch (index) {
         case 0:
@@ -111,14 +119,26 @@ export default {
           break;
       }
     });
+    //2: 防抖关键点：闭包，闭包关键点：外边声明变量
     //对bus总线的监听，一般放这里
+    const refresh=debounce(this.$refs.bScroll.refreshed,300);
     this.$bus.$on('itemImgLoad',()=>{
-      this.$refs.bScroll && this.$refs.bScroll.refreshed();
+      refresh();
     });
+
+    //3: 获取tabControl的offsetTop
+    console.log(this.$refs.tabControl.$el);
+
   },
   methods: {
-    // 事件监听
-
+    // debounce防抖实用程序,封装到commonjs里的utils.js里了
+/*     debounce(func,delay){
+      let timer=null;
+      return function (...args) {
+        if(timer){ clearTimeout(timer);};
+        timer=setTimeout(()=>{ func(); },delay);
+      };
+    }, */
     // 网络请求
     getHomeMultidata() {
       getHomeMultidata().then(res => {
@@ -132,6 +152,9 @@ export default {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
       });
+      //可以在这里写上拉加载更多的多次作用函数
+      //this.$refs.scroll.finishPullUp();
+      //注意，finishPullUp函数要在bscroll.vue里写好，现在我注释掉了
     },
     gotoTop() {
       //这里没有直接获取子组件下的scroll对象，而是先在bscroll组件里封装了scrollTo方法然后调用，好处是这里拿到当前子组件对象就行，不用管子组件里的scroll对象了（万一名字不对呢））
@@ -164,11 +187,12 @@ export default {
   right: 0;
   z-index: 100;
 }
-.sticky {
+//由于外包的是betterscroll，所以sticky没用了
+/* .sticky {
   position: sticky;
   top: 40px;
   z-index: 100;
-}
+} */
 .scroll-wrapper {
   //height:100vh;
   overflow: hidden;
