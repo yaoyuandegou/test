@@ -3,6 +3,8 @@ module.exports = {
     publicPath: process.env.NODE_ENV === "production" ? "./" : "./",
     devServer:{
         open:true,
+        sockHost:'192.168.0.33:8080',
+        disableHostCheck:true,
     },
     configureWebpack: {
         resolve: {
@@ -14,5 +16,5 @@ module.exports = {
                 'views': '@/views',
             }
         }
-    }
+    },
 };
