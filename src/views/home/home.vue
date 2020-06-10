@@ -13,6 +13,9 @@
     >
       <home-swiper :banners="banners" />
       <home-recommend-view :recommends="recommends" />
+      <input type="text" />
+      {{this["my-class"]}}
+      <!-- {{dataName}}----{{propsName}} -->
       <home-feature-view />
       <tab-control 
       :titles="['流行','新款','精选']" 
@@ -66,7 +69,12 @@ export default {
     backTopIcon
     /* swiper */
   },
-  props: {},
+  props: {
+    "props-name":{
+      type:String,
+      default:"props-shi"
+    }
+  },
   data() {
     return {
       banners: [],
@@ -80,6 +88,7 @@ export default {
       result: null,
       scrollPosition: [],
       tabOffsetTop:0,
+      "my-class":"this-good"
     };
   },
   computed: {
@@ -131,6 +140,7 @@ export default {
 
   },
   methods: {
+
     // debounce防抖实用程序,封装到commonjs里的utils.js里了
 /*     debounce(func,delay){
       let timer=null;
@@ -173,6 +183,9 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.this-good{
+  font-size: 10px;
+}
 #home {
   //padding-top:44px;
   height: 100vh;

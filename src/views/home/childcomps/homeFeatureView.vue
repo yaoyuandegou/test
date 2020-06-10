@@ -9,7 +9,8 @@
 <script>
 export default {
   components:{},
-  props:{},
+  props:{
+  },
   data(){
     return {
     }
@@ -24,5 +25,8 @@ export default {
 <style lang="less" scoped>
   .feature{
       img{width:100vw;}
+      border-bottom:10px solid #eee;
+      padding:3vw 0;
+
   }
 </style>
